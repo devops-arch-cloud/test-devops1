@@ -1,61 +1,20 @@
-pipeline {
-
-    agent any
-
-      parameters {
-        string(defaultValue: "us-east-2", description: 'Region', name: 'REGION') 
-        string(defaultValue: "dev", description: 'Environment', name: 'ENVIRONMENT')   
-        string(defaultValue: "", description: 'VPC ID', name: 'VPC')   
-    }
-
-    environment {
-        REGION="${params.REGION}"
-        ENVIRONMENT = "${params.ENVIRONMENT}"
-        VPC = "${params.VPC}"
-        AWS_ACCESS_KEY_ID     = "sdfsdfsdf"
-        AWS_SECRET_ACCESS_KEY = "sdfsdfsdfsfsfs"
-    }
-    stages {
-
-       stage('checkout') {
-      steps {
-        checkout scm
+pipelineJob("greetingJob") {
+  
+  parameters {
+         stringParam('name', "", 'name of the person')
+        }  definition {
+           cps {
+             script('''
+                 pipeline {
+                    agent any                    stages {
+                        stage('Greet') {
+                            steps {
+                                echo "Hello!! ${name}"
+                            }
+                         }
+                      }
+                   }
+              '''.stripIndent())       sandbox()
+          }
       }
-    }
-
-        stage('Terraform init') {
-            steps{
-                 sh '''
-                 
-                  
-                   terraform init 
-                '''
-            }
-        }
-        stage('Terraform plan') {
-
-            steps {
-                 sh '''
-                 
-                   terraform plan -var-file=terraform.tfvars -var="environment=${ENVIRONMENT}" -var="region=${REGION}" -var="vpc_id=${VPC}" -var="aws_access_key=${AWS_ACCESS_KEY_ID}" -var="aws_secret_key=${AWS_SECRET_ACCESS_KEY}"
-                '''
-               
-            }
-
-        }
-
-         stage('Terraform apply') {
-
-            steps {
-                 sh '''
-                   
-                   /usr/local/bin/terraform apply -auto-approve -var-file=terraform.tfvars -var="environment=${ENVIRONMENT}" -var="region=${REGION}" -var="vpc_id=${VPC}" -var="aws_access_key=${AWS_ACCESS_KEY_ID}" -var="aws_secret_key=${AWS_SECRET_ACCESS_KEY}"
-                '''  
-            }
-
-        }
-
-    }
-
-}
-
+  }
