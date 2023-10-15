@@ -16,14 +16,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = "bcd"
     }
     stages {
-  scm {
-						git {
-						    remote {
-						        url("https://github.com/devops-arch-cloud/test-devops1")
-						    }
-						    createTag(false)
-						}
-					}
+
 
         stage('Terraform init') {
             steps{
