@@ -12,8 +12,8 @@ pipeline {
         REGION="${params.REGION}"
         ENVIRONMENT = "${params.ENVIRONMENT}"
         VPC = "${params.VPC}"
-        AWS_ACCESS_KEY_ID     = credentials('aws_access_key')
-        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
+        AWS_ACCESS_KEY_ID     = "abc"
+        AWS_SECRET_ACCESS_KEY = "bcd"
     }
     stages {
 
