@@ -4,7 +4,7 @@ pipelineJob('aurora-postgres-cluster-existing-vpc') {
                     scm {
                         git {
                             remote {
-                                github("https://github.com/devops-arch-cloud/test-devops1")
+                                github("devops-arch-cloud/test-devops1")
                                
                             }
     
