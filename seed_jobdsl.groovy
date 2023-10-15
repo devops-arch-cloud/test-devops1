@@ -1,8 +1,17 @@
 pipelineJob('aurora-postgres-cluster-existing-vpc') {
-  definition {
-    cps {
-      script(readFileFromWorkspace('aurora-postgres-cluster-existing-vpc'))
-      sandbox()     
-    }
-  }
+   definition {
+                cpsScm {
+                    scm {
+                        git {
+                            remote {
+                                github("https://github.com/devops-arch-cloud/test-devops1")
+                               
+                            }
+    
+                            branch('$revision')
+                        }
+                    }
+    
+}
+   }
 }
