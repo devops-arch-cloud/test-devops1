@@ -17,11 +17,6 @@ pipeline {
     }
     stages {
 
-       stage('checkout') {
-      steps {
-        checkout scm
-      }
-    }
 
         stage('Terraform init') {
             steps{
