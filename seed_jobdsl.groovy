@@ -8,7 +8,7 @@ pipelineJob('aurora-postgres-cluster-existing-vpc') {
                                
                             }
     
-                            branch('$revision')
+                            branch('main')
                         }
                     }
     
