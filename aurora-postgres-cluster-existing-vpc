@@ -76,7 +76,7 @@ stage('checkout') {
         stage('Terraform init') {
             steps{
                  sh '''
-                 
+                 ls
                    cd examples/aurora-postgres-cluster-existing-vpc
                    terraform init 
                 '''
