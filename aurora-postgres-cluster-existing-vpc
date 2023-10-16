@@ -65,11 +65,16 @@ pipeline {
     }
     stages {
 stage('checkout') {
-      steps {
-        checkout scm
+      agent {
+        any
       }
-    }
-
+      steps {
+        script {
+          cleanWs()
+          handleCheckout()
+        }
+      }
+}
         stage('Terraform init') {
             steps{
                  sh '''
